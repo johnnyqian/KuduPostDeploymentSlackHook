@@ -69,15 +69,14 @@ function trParseBody(body)
 function getSlackUserName(parsedBody, success)
 {
     return (
-        (success ? 'Published:': 'Failed:') +
+        (success ? 'Deployed:': 'Failed:') +
         ' ' +
-        (parsedBody.siteName || 'unknown')
+        (parsedBody.siteName + '.azurewebsites.net' || 'unknown')
     );
 }
 
 function getSlackText(parsedBody)
 {
-    var hostName = parsedBody.hostName
     var id = parsedBody.id
     return (
         'Initiated by: ' +
@@ -85,8 +84,7 @@ function getSlackText(parsedBody)
         ' ' +
         (parsedBody.endTime || '') +
         '\r\n' +
-        (hostName ? '<https://' + hostName + '|' + hostName + '> ' : '') +
-        (id ? 'Id: ' + parsedBody.id + '\r\n' : '') +
+        (id ? 'Commit id: ' + parsedBody.id + '\r\n' : '') +
         '```' +
         (parsedBody.message || 'null message') +
         '```'
